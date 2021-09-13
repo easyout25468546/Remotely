@@ -116,7 +116,7 @@ namespace Remotely.Agent.Installer.Win.Services
         {
             var desktopExePath = Path.Combine(InstallPath, "Desktop", "Remotely_Desktop.exe");
             ProcessEx.StartHidden("netsh", "advfirewall firewall delete rule name=\"Remotely Desktop Unattended\"").WaitForExit();
-            ProcessEx.StartHidden("netsh", $"advfirewall firewall add rule name=\"Remotely Desktop Unattended\" program=\"{desktopExePath}\" protocol=any dir=in enable=yes action=allow description=\"The agent that allows screen sharing and remote control for Remotely.\"").WaitForExit();
+            ProcessEx.StartHidden("netsh", $"advfirewall firewall add rule name=\"Remotely Desktop Unattended\" program=\"{desktopExePath}\" protocol=any dir=in enable=yes action=allow description=\"The agent that allows screen sharing and remote control for Dumbkin.\"").WaitForExit();
         }
 
         private void BackupDirectory()
@@ -260,7 +260,7 @@ namespace Remotely.Agent.Installer.Win.Services
             }
             else
             {
-                ProgressMessageChanged.Invoke(this, "Downloading Remotely agent.");
+                ProgressMessageChanged.Invoke(this, "Downloading Dumbkin agent.");
                 using (var client = new WebClient())
                 {
                     client.DownloadProgressChanged += (sender, args) =>
@@ -272,7 +272,7 @@ namespace Remotely.Agent.Installer.Win.Services
                 }
             }
 
-            ProgressMessageChanged.Invoke(this, "Extracting Remotely files.");
+            ProgressMessageChanged.Invoke(this, "Extracting files.");
             ProgressValueChanged?.Invoke(this, 0);
 
             var tempDir = Path.Combine(Path.GetTempPath(), "RemotelyUpdate");
@@ -366,7 +366,7 @@ namespace Remotely.Agent.Installer.Win.Services
         private void InstallService()
         {
             Logger.Write("Installing service.");
-            ProgressMessageChanged?.Invoke(this, "Installing Remotely service.");
+            ProgressMessageChanged?.Invoke(this, "Installing service.");
             var serv = ServiceController.GetServices().FirstOrDefault(ser => ser.ServiceName == "Remotely_Service");
             if (serv == null)
             {
@@ -439,8 +439,8 @@ namespace Remotely.Agent.Installer.Win.Services
                 var remotelyService = ServiceController.GetServices().FirstOrDefault(x => x.ServiceName == "Remotely_Service");
                 if (remotelyService != null)
                 {
-                    Logger.Write("Stopping existing Remotely service.");
-                    ProgressMessageChanged?.Invoke(this, "Stopping existing Remotely service.");
+                    Logger.Write("Stopping existing Dumbkin service.");
+                    ProgressMessageChanged?.Invoke(this, "Stopping existing Dumbkin service.");
                     remotelyService.Stop();
                     remotelyService.WaitForStatus(ServiceControllerStatus.Stopped);
                 }

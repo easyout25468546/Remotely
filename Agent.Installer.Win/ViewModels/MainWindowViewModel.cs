@@ -335,7 +335,7 @@ namespace Remotely.Agent.Installer.Win.ViewModels
                 (serverUri.Scheme != Uri.UriSchemeHttp && serverUri.Scheme != Uri.UriSchemeHttps))
             {
                 Logger.Write("ServerUrl is not valid.");
-                MessageBoxEx.Show("Server URL must be a valid Uri (e.g. https://app.remotely.one).", "Invalid Server URL", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBoxEx.Show("Server URL must be a valid Uri.", "Invalid Server URL", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -470,14 +470,14 @@ namespace Remotely.Agent.Installer.Win.ViewModels
                     return;
                 }
 
-                HeaderMessage = "Installing Remotely...";
+                HeaderMessage = "Installing Dumbkin...";
 
                 if (await Installer.Install(ServerUrl, OrganizationID, DeviceGroup, DeviceAlias, DeviceUuid, CreateSupportShortcut))
                 {
                     IsServiceInstalled = true;
                     Progress = 0;
                     HeaderMessage = "Installation completed.";
-                    StatusMessage = "Remotely has been installed.  You can now close this window.";
+                    StatusMessage = "Dumbkin has been installed.  You can now close this window.";
                 }
                 else
                 {
@@ -506,14 +506,14 @@ namespace Remotely.Agent.Installer.Win.ViewModels
             {
                 IsReadyState = false;
 
-                HeaderMessage = "Uninstalling Remotely...";
+                HeaderMessage = "Uninstalling Dumbkin...";
 
                 if (await Installer.Uninstall())
                 {
                     IsServiceInstalled = false;
                     Progress = 0;
                     HeaderMessage = "Uninstall completed.";
-                    StatusMessage = "Remotely has been uninstalled.  You can now close this window.";
+                    StatusMessage = "Dumbkin has been uninstalled.  You can now close this window.";
                 }
                 else
                 {
